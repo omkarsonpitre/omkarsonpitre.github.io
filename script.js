@@ -1,17 +1,18 @@
 /**
  * Omkar Sonpitre Portfolio - Interactive Scripts
- * Features: Typewriter, Filtering, Mobile Drawer, Modals, WhatsApp Form
+ * Features: Typewriter, In-Site YouTube Shorts Player, Image Lightbox, Mobile Nav, WhatsApp Form
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Dynamic Typewriter Effect
-  const words = [
-    'Video Editor 🎬',
-    'Graphic Designer 🎨',
+  // 1. Dynamic Typewriter Effect - Digital Marketing Primary
+  const roles = [
     'Digital Marketer 📈',
-    'Founder of omiii.studio ✨'
+    'YouTube SEO Specialist 🚀',
+    'Content Strategist 💡',
+    'Video Editor 🎬',
+    'Graphic Designer 🎨'
   ];
-  let wordIndex = 0;
+  let roleIndex = 0;
   let charIndex = 0;
   let isDeleting = false;
   const typewriterElement = document.getElementById('typewriter');
@@ -22,24 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
   function typeEffect() {
     if (!typewriterElement) return;
 
-    const currentWord = words[wordIndex];
+    const currentRole = roles[roleIndex];
 
     if (isDeleting) {
-      typewriterElement.textContent = currentWord.substring(0, charIndex - 1);
+      typewriterElement.textContent = currentRole.substring(0, charIndex - 1);
       charIndex--;
     } else {
-      typewriterElement.textContent = currentWord.substring(0, charIndex + 1);
+      typewriterElement.textContent = currentRole.substring(0, charIndex + 1);
       charIndex++;
     }
 
     let delay = isDeleting ? deletingSpeed : typingSpeed;
 
-    if (!isDeleting && charIndex === currentWord.length) {
+    if (!isDeleting && charIndex === currentRole.length) {
       delay = pauseEnd;
       isDeleting = true;
     } else if (isDeleting && charIndex === 0) {
       isDeleting = false;
-      wordIndex = (wordIndex + 1) % words.length;
+      roleIndex = (roleIndex + 1) % roles.length;
       delay = 400;
     }
 
@@ -67,38 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3. Portfolio Tab Filtering
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const portfolioItems = document.querySelectorAll('.portfolio-item');
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active class from all buttons
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterValue = btn.getAttribute('data-filter');
-
-      portfolioItems.forEach(item => {
-        const itemCategory = item.getAttribute('data-category');
-        if (filterValue === 'all' || itemCategory === filterValue) {
-          item.classList.remove('hide');
-          item.style.opacity = '0';
-          item.style.transform = 'translateY(15px)';
-          setTimeout(() => {
-            item.style.transition = 'all 0.4s ease';
-            item.style.opacity = '1';
-            item.style.transform = 'translateY(0)';
-          }, 50);
-        } else {
-          item.classList.add('hide');
-        }
-      });
-    });
-  });
-
-  // 4. Active Nav Item Spy on Scroll
+  // 3. Active Nav Item Spy on Scroll & Navbar Background
   const sections = document.querySelectorAll('section[id]');
+  const navbar = document.getElementById('navbar');
+
   window.addEventListener('scroll', () => {
     const scrollY = window.pageYOffset;
 
@@ -115,58 +88,90 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Navbar background blur intensity on scroll
-    const navbar = document.getElementById('navbar');
     if (navbar) {
       if (scrollY > 50) {
-        navbar.style.background = 'rgba(9, 10, 15, 0.92)';
-        navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.4)';
+        navbar.style.background = 'rgba(9, 10, 15, 0.95)';
+        navbar.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
       } else {
-        navbar.style.background = 'rgba(9, 10, 15, 0.75)';
+        navbar.style.background = 'rgba(9, 10, 15, 0.8)';
         navbar.style.boxShadow = 'none';
       }
     }
   });
 
-  // 5. Dynamic Footer Year
+  // 4. Dynamic Footer Year
   const yearElement = document.getElementById('year');
   if (yearElement) {
     yearElement.textContent = new Date().getFullYear();
   }
 });
 
-// 6. Project Modal Handlers
-function openModal(title, description, linkUrl) {
-  const modal = document.getElementById('project-modal');
-  const modalTitle = document.getElementById('modal-title');
-  const modalDescription = document.getElementById('modal-description');
-  const modalLink = document.getElementById('modal-link');
+// 5. In-Site YouTube Shorts Player Modal
+function openVideoModal(videoId, title) {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('video-iframe');
+  const modalTitle = document.getElementById('modal-video-title');
 
-  if (modal && modalTitle && modalDescription && modalLink) {
-    modalTitle.textContent = title;
-    modalDescription.textContent = description;
-    modalLink.href = linkUrl;
+  if (modal && iframe) {
+    // Using youtube-nocookie and autoplay
+    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+    if (modalTitle && title) {
+      modalTitle.textContent = title;
+    }
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
 }
 
-function closeModal() {
-  const modal = document.getElementById('project-modal');
-  if (modal) {
+function closeVideoModal() {
+  const modal = document.getElementById('video-modal');
+  const iframe = document.getElementById('video-iframe');
+
+  if (modal && iframe) {
+    // Resetting iframe src stops the audio and video immediately
+    iframe.src = '';
     modal.classList.remove('active');
     document.body.style.overflow = 'auto';
   }
 }
 
-// Close modal with Escape key
+// 6. Image Lightbox Modal (Thumbnails & Social Media Creatives)
+function openImageLightbox(imgSrc, caption) {
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+
+  if (lightbox && lightboxImg) {
+    lightboxImg.src = imgSrc;
+    lightboxImg.alt = caption || 'Portfolio Image Preview';
+    if (lightboxCaption) {
+      lightboxCaption.textContent = caption || '';
+    }
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeImageLightbox() {
+  const lightbox = document.getElementById('image-lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  if (lightbox) {
+    lightbox.classList.remove('active');
+    if (lightboxImg) lightboxImg.src = '';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+// 7. Global Keyboard Handler (Escape Key closes any open modal)
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    closeModal();
+    closeVideoModal();
+    closeImageLightbox();
   }
 });
 
-// 7. Interactive WhatsApp Form Handler
+// 8. Interactive WhatsApp Contact Form Handler
 function handleFormSubmit(event) {
   event.preventDefault();
 
@@ -175,16 +180,13 @@ function handleFormSubmit(event) {
   const service = document.getElementById('service').value;
   const message = document.getElementById('message').value.trim();
 
-  // Create formatted WhatsApp message
   const whatsappNumber = '918999667962';
-  const text = `*New Portfolio Inquiry - omiii.studio*%0A%0A` +
+  const text = `*New Portfolio Inquiry - Omkar Sonpitre*%0A%0A` +
                `*Name:* ${encodeURIComponent(name)}%0A` +
                `*Contact:* ${encodeURIComponent(contact)}%0A` +
-               `*Service Required:* ${encodeURIComponent(service)}%0A` +
-               `*Project Details:* ${encodeURIComponent(message)}`;
+               `*Area of Interest:* ${encodeURIComponent(service)}%0A` +
+               `*Message Details:* ${encodeURIComponent(message)}`;
 
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${text}`;
-
-  // Open WhatsApp in new tab
   window.open(whatsappUrl, '_blank');
 }
