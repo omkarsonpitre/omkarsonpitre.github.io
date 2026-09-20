@@ -2409,3 +2409,20 @@ body { background: radial-gradient(ellipse 65% 35% at 50% -5%, rgba(36,66,79,.35
 @keyframes dotBlink { 0%,100% { opacity: .35; transform: scale(.7); } 50% { opacity: 1; transform: scale(1.35); } }
 @media (max-width: 768px) { .orange-hero-visual { min-height: 330px; } .hero-sun-glow { width: 180px; height: 180px; } .hero-orbit-one { width: 250px; } .hero-orbit-two { width: 285px; } .hero-orbit-three { height: 305px; } }
 @media (prefers-reduced-motion: reduce) { .hero-sun-glow, .orange-hero-visual::before, .hero-orbit, .hero-dot { animation: none; } }
+/* Professional orange hero refinement: compact static sun/orbits, animated dots only. */
+.orange-hero-visual { min-height: 410px; }
+.orange-hero-visual::before { width: 260px; height: 260px; animation: none; opacity: .62; }
+.hero-sun-glow { width: 132px; height: 132px; animation: none; box-shadow: 0 0 24px rgba(255,117,27,.72), 0 0 64px rgba(255,55,10,.32); }
+.hero-orbit { box-shadow: 0 0 9px rgba(255,78,16,.16); animation: none !important; }
+.hero-orbit-one { width: 235px; height: 88px; }
+.hero-orbit-two { width: 270px; height: 112px; }
+.hero-orbit-three { width: 220px; height: 275px; }
+.orange-hero-visual .visual-avatar { width: 270px; height: 270px; border-color: rgba(255,132,48,.82); box-shadow: 0 0 28px rgba(255,86,12,.3), inset 0 0 32px rgba(255,67,10,.1); }
+.orange-hero-visual .avatar-inner { width: 250px; height: 250px; }
+.orange-hero-visual .hero-portrait { object-position: center 18%; }
+.orange-hero-visual .corner-badge { z-index: 3; }
+.gmb-icon { width: 64px; height: 64px; flex: 0 0 64px; overflow: hidden; display: flex; align-items: center; justify-content: center; border-radius: 16px; background: #090909; border: 1px solid rgba(255,108,31,.38); box-shadow: 0 0 16px rgba(255,67,10,.12); }
+.gmb-icon img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+.gmb-card:hover .gmb-icon { border-color: #ff8c32; box-shadow: 0 0 20px rgba(255,67,10,.25); }
+@media (max-width: 900px) { .orange-hero-visual { min-height: 360px; } .orange-hero-visual .visual-avatar { width: 235px; height: 235px; } .orange-hero-visual .avatar-inner { width: 215px; height: 215px; } .hero-orbit-one { width: 205px; } .hero-orbit-two { width: 235px; } .hero-orbit-three { height: 245px; } }
+@media (max-width: 768px) { .orange-hero-visual { min-height: 330px; } .orange-hero-visual .visual-avatar { width: 220px; height: 220px; } .orange-hero-visual .avatar-inner { width: 202px; height: 202px; } }
