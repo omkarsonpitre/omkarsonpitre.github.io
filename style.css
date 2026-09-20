@@ -2488,3 +2488,19 @@ body::before { opacity: .1; background-image: linear-gradient(rgba(255,124,39,.0
 .btn-primary, .btn-nav { animation: orangeCtaPulse 4s ease-in-out infinite; }
 @keyframes orangeCtaPulse { 0%,100% { box-shadow: 0 0 0 rgba(255,91,20,0); } 50% { box-shadow: 0 0 24px rgba(255,91,20,.24); } }
 @media (prefers-reduced-motion: reduce) { .btn-primary, .btn-nav { animation: none; } }
+/* Reference-style capsule header; markup and navigation items remain unchanged. */
+.navbar { background: transparent; border-bottom: 0; }
+.nav-container { height: 70px; max-width: 1250px; margin: 16px auto 0; padding: 0 1.4rem; border: 1px solid rgba(255,106,26,.23); border-radius: 24px; background: rgba(4,10,14,.86); box-shadow: 0 10px 34px rgba(0,0,0,.22), inset 0 0 22px rgba(255,106,26,.025); }
+.brand-logo { color: #f8f5f0; }
+.logo-badge { width: 38px; height: 38px; border-radius: 50%; background: var(--gradient-main); color: #1a0800; box-shadow: 0 0 16px rgba(255,91,20,.25); }
+.brand-text { font-size: 1.05rem; }
+.nav-list { gap: 1.45rem; }
+.nav-link { color: #d3ccc7; font-size: .84rem; }
+.nav-link:hover, .nav-link.active { color: #ff8a3d; }
+.nav-actions .btn-nav { padding: .62rem 1.35rem; border: 1px solid rgba(255,157,74,.7); background: transparent; color: #f5eee9; box-shadow: none; animation: none; }
+.nav-actions .btn-nav:hover { background: var(--gradient-main); color: #1a0800; }
+.orange-hero-visual .visual-avatar { width: 300px; height: 300px; }
+.orange-hero-visual .avatar-inner { width: 278px; height: 278px; }
+.orange-hero-visual .hero-portrait { object-position: center 16%; }
+@media (max-width: 900px) { .nav-container { margin: 10px 1rem 0; } .orange-hero-visual .visual-avatar { width: 260px; height: 260px; } .orange-hero-visual .avatar-inner { width: 240px; height: 240px; } }
+@media (max-width: 768px) { .navbar { background: rgba(5,5,5,.9); } .nav-container { margin: 0; border-radius: 0 0 18px 18px; border-top: 0; } .orange-hero-visual .visual-avatar { width: 235px; height: 235px; } .orange-hero-visual .avatar-inner { width: 217px; height: 217px; } }
