@@ -89,12 +89,20 @@ async function handleResumeSubmit(event) {
   if (replyTo && email) replyTo.value = email.value;
   if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending details...'; }
   try {
-    const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-    if (!response.ok) throw new Error('Email service error');
+    const payload = Object.fromEntries(new FormData(form).entries());
+    const response = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success === false || result.success === 'false') {
+      throw new Error(result.message || 'Email service error');
+    }
     if (button) button.innerHTML = '<i class="fa-solid fa-check"></i> Details Sent — Downloading...';
     downloadResume();
   } catch (error) {
     if (button) { button.disabled = false; button.innerHTML = '<i class="fa-solid fa-download"></i> Submit &amp; Download Resume'; }
-    alert('Resume details could not be sent right now. Please try again.');
+    alert('Details email could not be sent. Please check that FormSubmit activation was confirmed for omkarsonpitre07@gmail.com, then try again.');
   }
 }
