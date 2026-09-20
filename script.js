@@ -88,7 +88,7 @@ async function handleResumeSubmit(event) {
   const name = document.getElementById('resume-name')?.value.trim() || '';
   const company = document.getElementById('resume-company')?.value.trim() || '';
   const email = document.getElementById('resume-email')?.value.trim() || '';
-  if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving details...'; }
+  if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Downloading Resume...'; }
   const body = JSON.stringify({ name, company, email });
   try {
     await fetch(form.action, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
