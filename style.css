@@ -2544,3 +2544,7 @@ img { max-width: 100%; }
 @media (min-width: 701px) {
   .container, .hero-container { max-width: 1200px; margin-left: auto; margin-right: auto; }
 }
+/* Desktop-only header/footer breathing room; mobile remains edge-to-edge responsive. */
+@media (min-width: 701px) {
+  .nav-container, .footer-container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; }
+}
