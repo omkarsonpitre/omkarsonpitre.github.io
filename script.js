@@ -69,3 +69,13 @@ function handleContactSubmit(event) {
   form.reset();
 }
 
+
+
+function showWorkPanel(target) {
+  document.querySelectorAll('.work-tab').forEach(tab => {
+    const active = tab.dataset.workTab === target;
+    tab.classList.toggle('active', active);
+    tab.setAttribute('aria-selected', String(active));
+  });
+  document.querySelectorAll('.work-panel').forEach(panel => panel.classList.toggle('active', panel.dataset.workPanel === target));
+}
