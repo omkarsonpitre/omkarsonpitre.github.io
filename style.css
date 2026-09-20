@@ -2349,3 +2349,38 @@ body { background: radial-gradient(ellipse 65% 35% at 50% -5%, rgba(36,66,79,.35
 .form-group input, .form-group textarea, .form-group select { background: rgba(0,0,0,.24); border-color: rgba(255,255,255,.14); }
 .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--accent-cyan); }
 .footer { background: #030608; }
+/* Subtle reference-inspired motion; no layout or content changes. */
+@keyframes editorialRise {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes softFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-9px) rotate(.8deg); }
+}
+@keyframes limePulse {
+  0%, 100% { box-shadow: 0 0 0 rgba(216,255,0,0); }
+  50% { box-shadow: 0 0 26px rgba(216,255,0,.18); }
+}
+.motion-item { opacity: 0; transform: translateY(28px); transition: opacity .75s cubic-bezier(.22,1,.36,1), transform .75s cubic-bezier(.22,1,.36,1); transition-delay: var(--motion-delay, 0ms); }
+.motion-item.is-visible { opacity: 1; transform: translateY(0); }
+.hero-content > *, .hero-visual { animation: editorialRise .85s cubic-bezier(.22,1,.36,1) both; }
+.hero-content > :nth-child(1) { animation-delay: .08s; }
+.hero-content > :nth-child(2) { animation-delay: .16s; }
+.hero-content > :nth-child(3) { animation-delay: .24s; }
+.hero-content > :nth-child(4) { animation-delay: .32s; }
+.hero-content > :nth-child(5) { animation-delay: .4s; }
+.hero-content > :nth-child(6) { animation-delay: .48s; }
+.hero-visual { animation-delay: .3s; }
+.visual-avatar { animation: softFloat 5s ease-in-out infinite; }
+.corner-badge { animation: softFloat 4s ease-in-out infinite; }
+.badge-bottom-left { animation-delay: .7s; }
+.badge-bottom-right { animation-delay: 1.2s; }
+.btn-primary, .btn-nav { animation: limePulse 3.8s ease-in-out infinite; }
+.work-card, .service-card, .skill-category, .drive-image-card, .short-card, .design-card { will-change: transform; }
+.work-card:hover, .service-card:hover, .skill-category:hover, .drive-image-card:hover, .short-card:hover, .design-card:hover { transform: translateY(-7px) scale(1.01); }
+.glow { transition: transform 1s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  .motion-item { opacity: 1; transform: none; }
+}

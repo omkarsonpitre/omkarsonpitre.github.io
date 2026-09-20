@@ -13,6 +13,37 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   typeEffect();
 
+  // Reference-inspired scroll reveals and restrained parallax motion.
+  const motionTargets = document.querySelectorAll('.section-header, .about-grid > *, .skill-category, .work-card, .service-card, .work-panel, .contact-form, .contact-card-highlight, .footer-container');
+  motionTargets.forEach((item, index) => {
+    item.classList.add('motion-item');
+    item.style.setProperty('--motion-delay', `${Math.min(index % 6, 5) * 70}ms`);
+  });
+  if ('IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    motionTargets.forEach(item => revealObserver.observe(item));
+  } else {
+    motionTargets.forEach(item => item.classList.add('is-visible'));
+  }
+  const glowLayers = document.querySelectorAll('.glow');
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      glowLayers.forEach((glow, index) => { glow.style.transform = `translate3d(0, ${scrollY * (index + 1) * 0.018}px, 0)`; });
+      ticking = false;
+    });
+  }, { passive: true });
+
   const toggle = document.getElementById('mobile-toggle');
   const menu = document.getElementById('nav-menu');
   document.querySelectorAll('.nav-link').forEach(link => link.addEventListener('click', () => { toggle?.classList.remove('active'); menu?.classList.remove('active'); }));
