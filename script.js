@@ -54,3 +54,27 @@ function openVideoModal(videoId, title) { let modal = document.getElementById('v
 function closeVideoModal() { const modal = document.getElementById('video-modal'); if (modal) { modal.querySelector('#video-iframe').src = ''; modal.classList.remove('active'); document.body.style.overflow = ''; } }
 function openImageLightbox(src, caption) { const modal = document.getElementById('image-lightbox'); if (modal) { document.getElementById('lightbox-img').src = src; document.getElementById('lightbox-caption').textContent = caption || ''; modal.classList.add('active'); document.body.style.overflow = 'hidden'; } }
 function closeImageLightbox() { const modal = document.getElementById('image-lightbox'); if (modal) { modal.classList.remove('active'); document.getElementById('lightbox-img').src = ''; document.body.style.overflow = ''; } }
+
+
+function handleContactSubmit(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const name = document.getElementById('contact-name').value.trim();
+  const company = document.getElementById('contact-company').value.trim();
+  const service = document.getElementById('contact-service').value;
+  const email = document.getElementById('contact-email').value.trim();
+  const message = document.getElementById('contact-message').value.trim();
+  const text = `New Portfolio Contact%0A%0AName: ${encodeURIComponent(name)}%0ACompany: ${encodeURIComponent(company)}%0AService: ${encodeURIComponent(service)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
+  window.open(`https://wa.me/918999667962?text=${text}`, '_blank', 'noopener');
+  form.reset();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.carousel-shell').forEach(shell => {
+    const track = shell.querySelector('.carousel-track');
+    shell.querySelectorAll('.carousel-arrow').forEach(button => button.addEventListener('click', () => {
+      const amount = Math.max(track.clientWidth * 0.82, 260);
+      track.scrollBy({ left: button.dataset.scroll === 'next' ? amount : -amount, behavior: 'smooth' });
+    }));
+  });
+});
