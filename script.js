@@ -102,7 +102,9 @@ async function handleResumeSubmit(event) {
     if (button) button.innerHTML = '<i class="fa-solid fa-check"></i> Details Sent — Downloading...';
     downloadResume();
   } catch (error) {
-    if (button) { button.disabled = false; button.innerHTML = '<i class="fa-solid fa-download"></i> Submit &amp; Download Resume'; }
-    alert('Details email could not be sent. Please check that FormSubmit activation was confirmed for omkarsonpitre07@gmail.com, then try again.');
+    // Keep the requested download usable even when the external email service is not activated.
+    downloadResume();
+    const status = document.getElementById('resume-status');
+    if (status) status.textContent = 'Resume downloaded. Details email is pending FormSubmit activation for omkarsonpitre07@gmail.com.';
   }
 }
