@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelector('[data-lightbox-close]')?.addEventListener('click', closeImageLightbox);
   document.getElementById('resume-modal')?.addEventListener('click', e => { if (e.target.id === 'resume-modal') closeResumeModal(); });
   document.getElementById('image-lightbox')?.addEventListener('click', e => { if (e.target.id === 'image-lightbox') closeImageLightbox(); });
-  document.getElementById('resume-form')?.addEventListener('submit', () => setTimeout(downloadResume, 900));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeResumeModal(); closeImageLightbox(); closeVideoModal(); } });
 });
 
@@ -78,4 +77,24 @@ function showWorkPanel(target) {
     tab.setAttribute('aria-selected', String(active));
   });
   document.querySelectorAll('.work-panel').forEach(panel => panel.classList.toggle('active', panel.dataset.workPanel === target));
+}
+
+
+async function handleResumeSubmit(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const button = form.querySelector('button[type="submit"]');
+  const replyTo = form.querySelector('[name="_replyto"]');
+  const email = form.querySelector('[name="email"]');
+  if (replyTo && email) replyTo.value = email.value;
+  if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending details...'; }
+  try {
+    const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+    if (!response.ok) throw new Error('Email service error');
+    if (button) button.innerHTML = '<i class="fa-solid fa-check"></i> Details Sent — Downloading...';
+    downloadResume();
+  } catch (error) {
+    if (button) { button.disabled = false; button.innerHTML = '<i class="fa-solid fa-download"></i> Submit &amp; Download Resume'; }
+    alert('Resume details could not be sent right now. Please try again.');
+  }
 }
