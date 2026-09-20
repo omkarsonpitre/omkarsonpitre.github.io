@@ -69,12 +69,3 @@ function handleContactSubmit(event) {
   form.reset();
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.carousel-shell').forEach(shell => {
-    const track = shell.querySelector('.carousel-track');
-    shell.querySelectorAll('.carousel-arrow').forEach(button => button.addEventListener('click', () => {
-      const amount = Math.max(track.clientWidth * 0.82, 260);
-      track.scrollBy({ left: button.dataset.scroll === 'next' ? amount : -amount, behavior: 'smooth' });
-    }));
-  });
-});
