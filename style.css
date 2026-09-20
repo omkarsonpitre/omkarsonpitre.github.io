@@ -2426,3 +2426,65 @@ body { background: radial-gradient(ellipse 65% 35% at 50% -5%, rgba(36,66,79,.35
 .gmb-card:hover .gmb-icon { border-color: #ff8c32; box-shadow: 0 0 20px rgba(255,67,10,.25); }
 @media (max-width: 900px) { .orange-hero-visual { min-height: 360px; } .orange-hero-visual .visual-avatar { width: 235px; height: 235px; } .orange-hero-visual .avatar-inner { width: 215px; height: 215px; } .hero-orbit-one { width: 205px; } .hero-orbit-two { width: 235px; } .hero-orbit-three { height: 245px; } }
 @media (max-width: 768px) { .orange-hero-visual { min-height: 330px; } .orange-hero-visual .visual-avatar { width: 220px; height: 220px; } .orange-hero-visual .avatar-inner { width: 202px; height: 202px; } }
+/* Full-site reference theme: black + orange/red glow. Content and structure unchanged. */
+:root {
+  --bg-primary: #050505;
+  --bg-secondary: #080808;
+  --bg-card: #11100f;
+  --bg-card-hover: #1a1210;
+  --border-color: rgba(255,255,255,.12);
+  --border-color-hover: rgba(255,102,26,.75);
+  --accent-cyan: #ff6a1a;
+  --accent-blue: #ff8a3d;
+  --accent-purple: #e54518;
+  --accent-green: #ff6a1a;
+  --accent-emerald: #ff7b25;
+  --accent-amber: #ffb347;
+  --text-primary: #f6f5f2;
+  --text-secondary: #b1aba6;
+  --text-muted: #746d68;
+  --gradient-main: linear-gradient(135deg, #ffb52e 0%, #ff6a1a 55%, #e13b16 100%);
+  --gradient-green: linear-gradient(135deg, #ffb52e 0%, #ff6a1a 100%);
+  --gradient-purple: linear-gradient(135deg, #ff7b25 0%, #d93612 100%);
+  --gradient-card: linear-gradient(145deg, rgba(255,124,39,.09), rgba(255,255,255,.018));
+  --shadow-glow: 0 0 28px rgba(255,91,20,.2);
+}
+body { background: radial-gradient(ellipse 52% 30% at 100% 0%, rgba(255,75,12,.14), transparent 68%), radial-gradient(ellipse 45% 26% at 0% 100%, rgba(255,92,14,.12), transparent 70%), #050505; }
+body::before { opacity: .1; background-image: linear-gradient(rgba(255,124,39,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,124,39,.035) 1px, transparent 1px); }
+.glow-1 { background: #ff5a16; }
+.glow-2 { background: #e13b16; }
+.glow-3 { background: #ff8a3d; }
+.gradient-text { background: var(--gradient-main); }
+.section-tag { color: #ff8a3d; background: rgba(255,102,26,.08); border-color: rgba(255,102,26,.35); }
+.navbar { background: rgba(5,5,5,.86); border-bottom-color: rgba(255,102,26,.18); }
+.nav-link::after { background: #ff6a1a; }
+.nav-link:hover, .nav-link.active { color: #fff; }
+.btn-primary, .btn-nav { background: var(--gradient-main); color: #180900; box-shadow: 0 0 22px rgba(255,91,20,.22); }
+.btn-primary:hover, .btn-nav:hover { background: #ff923f; color: #180900; box-shadow: 0 0 30px rgba(255,91,20,.38); }
+.btn-secondary { background: transparent; color: #ff8a3d; border-color: rgba(255,102,26,.62); }
+.btn-secondary:hover { background: #ff6a1a; color: #170700; }
+.btn-outline:hover { border-color: #ff6a1a; background: rgba(255,102,26,.1); }
+.availability-pill { background: rgba(255,102,26,.08); color: #ff9a4d; border-color: rgba(255,102,26,.36); }
+.status-indicator { background: #ff6a1a; box-shadow: 0 0 10px #ff6a1a; }
+.hero-subheadline .highlight-role { color: #1a0800; background: var(--gradient-main); border-color: transparent; }
+.hero-typewriter, .dynamic-text { color: #ff8a3d; }
+.social-icon:hover { color: #ff8a3d; background: rgba(255,102,26,.12); border-color: #ff6a1a; }
+.bio-heading, .info-card-header h4, .panel-title, .sub-work-title, .work-kicker, .analytics-label { color: #ff8a3d; }
+.info-title i, .category-icon-box, .skill-dot, .service-card i { color: #ff6a1a; }
+.skill-pill { background: rgba(255,102,26,.07); border-color: rgba(255,102,26,.24); }
+.skill-pill:hover { background: rgba(255,102,26,.16); border-color: #ff6a1a; }
+.skill-dot { background: #ff6a1a; box-shadow: 0 0 8px rgba(255,102,26,.5); }
+.work-tabs { background: rgba(255,255,255,.035); border-color: rgba(255,102,26,.22); }
+.work-tab.active, .work-tab:hover { background: var(--gradient-main); color: #180900; }
+.about-card-bio, .about-card-info, .skill-category, .work-card, .service-card, .contact-form, .contact-info-card, .resume-modal-card, .drive-image-card, .short-card, .design-card { background: var(--gradient-card); border-color: rgba(255,255,255,.12); }
+.about-card-bio:hover, .about-card-info:hover, .skill-category:hover, .work-card:hover, .service-card:hover { border-color: rgba(255,102,26,.5); }
+.work-card:hover, .service-card:hover, .skill-category:hover, .drive-image-card:hover, .short-card:hover, .design-card:hover { box-shadow: 0 16px 38px rgba(0,0,0,.38), 0 0 26px rgba(255,78,16,.13); }
+.find-online, .find-me-online { background: linear-gradient(145deg, rgba(255,102,26,.09), rgba(255,255,255,.025)); border-color: rgba(255,102,26,.3); }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: #ff6a1a; box-shadow: 0 0 0 3px rgba(255,102,26,.1); }
+.form-group select option { background: #11100f; color: #fff; }
+.footer { background: #030303; border-top-color: rgba(255,102,26,.2); }
+.footer a:hover { color: #ff8a3d; }
+/* Orange motion accents matching the reference direction. */
+.btn-primary, .btn-nav { animation: orangeCtaPulse 4s ease-in-out infinite; }
+@keyframes orangeCtaPulse { 0%,100% { box-shadow: 0 0 0 rgba(255,91,20,0); } 50% { box-shadow: 0 0 24px rgba(255,91,20,.24); } }
+@media (prefers-reduced-motion: reduce) { .btn-primary, .btn-nav { animation: none; } }
