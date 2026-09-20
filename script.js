@@ -84,27 +84,20 @@ async function handleResumeSubmit(event) {
   event.preventDefault();
   const form = event.currentTarget;
   const button = form.querySelector('button[type="submit"]');
-  const replyTo = form.querySelector('[name="_replyto"]');
-  const email = form.querySelector('[name="email"]');
-  if (replyTo && email) replyTo.value = email.value;
-  if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending details...'; }
+  const status = document.getElementById('resume-status');
+  const name = document.getElementById('resume-name')?.value.trim() || '';
+  const company = document.getElementById('resume-company')?.value.trim() || '';
+  const email = document.getElementById('resume-email')?.value.trim() || '';
+  if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Saving details...'; }
+  const body = JSON.stringify({ name, company, email });
   try {
-    const payload = Object.fromEntries(new FormData(form).entries());
-    const response = await fetch(form.action, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    });
-    const result = await response.json().catch(() => ({}));
-    if (!response.ok || result.success === false || result.success === 'false') {
-      throw new Error(result.message || 'Email service error');
-    }
-    if (button) button.innerHTML = '<i class="fa-solid fa-check"></i> Details Sent — Downloading...';
+    await fetch(form.action, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body });
+    if (status) status.textContent = 'Details saved. Your resume is downloading...';
+    if (button) button.innerHTML = '<i class="fa-solid fa-check"></i> Saved — Downloading...';
     downloadResume();
   } catch (error) {
-    // Keep the requested download usable even when the external email service is not activated.
+    if (status) status.textContent = 'Resume downloaded. Please try the form again if details do not appear in the Sheet.';
+    if (button) button.innerHTML = '<i class="fa-solid fa-download"></i> Download Resume';
     downloadResume();
-    const status = document.getElementById('resume-status');
-    if (status) status.textContent = 'Resume downloaded. Details email is pending FormSubmit activation for omkarsonpitre07@gmail.com.';
   }
 }
