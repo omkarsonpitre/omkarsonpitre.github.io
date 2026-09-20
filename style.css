@@ -2504,3 +2504,39 @@ body::before { opacity: .1; background-image: linear-gradient(rgba(255,124,39,.0
 .orange-hero-visual .hero-portrait { object-position: center 16%; }
 @media (max-width: 900px) { .nav-container { margin: 10px 1rem 0; } .orange-hero-visual .visual-avatar { width: 260px; height: 260px; } .orange-hero-visual .avatar-inner { width: 240px; height: 240px; } }
 @media (max-width: 768px) { .navbar { background: rgba(5,5,5,.9); } .nav-container { margin: 0; border-radius: 0 0 18px 18px; border-top: 0; } .orange-hero-visual .visual-avatar { width: 235px; height: 235px; } .orange-hero-visual .avatar-inner { width: 217px; height: 217px; } }
+/* Mobile stability and smooth-loading refinement. */
+html, body { max-width: 100%; overflow-x: hidden; }
+*, *::before, *::after { box-sizing: border-box; }
+img { max-width: 100%; }
+.container, .nav-container, .hero-container, .work-panel, .work-grid, .media-grid, .design-grid, .analytics-work-groups { min-width: 0; max-width: 100%; }
+.work-panel.active { overflow: hidden; }
+.work-grid, .media-grid, .design-grid, .drive-image-grid { width: 100%; }
+.work-card, .short-card, .design-card, .drive-image-card { min-width: 0; max-width: 100%; }
+.work-card img, .short-card img, .design-card img, .drive-image-card img { display: block; background: linear-gradient(145deg, #12100f, #050505); }
+.work-tab { white-space: nowrap; }
+.section { contain: layout paint; }
+.motion-item { will-change: opacity, transform; }
+.work-card, .short-card, .design-card, .service-card, .skill-category, .drive-image-card { will-change: auto; }
+@media (max-width: 700px) {
+  .container { width: 100%; padding-left: 1rem; padding-right: 1rem; }
+  .hero-container { overflow: hidden; }
+  .hero-content, .hero-visual { min-width: 0; max-width: 100%; }
+  .hero-visual { overflow: hidden; }
+  .orange-hero-visual { width: 100%; min-height: 310px; }
+  .orange-hero-visual .visual-avatar { max-width: 215px; max-height: 215px; }
+  .orange-hero-visual .avatar-inner { max-width: 197px; max-height: 197px; }
+  .work-tabs { width: 100%; gap: .5rem; margin-bottom: 1.35rem; }
+  .work-tab { flex: 1 1 auto; min-width: 0; padding: .7rem .55rem; font-size: .78rem; }
+  .work-panel.active { padding: 0; }
+  .work-grid, .media-grid, .design-grid, .drive-image-grid, .analytics-work-groups .analytics-grid { grid-template-columns: 1fr; gap: .9rem; }
+  .work-card { width: 100%; overflow: hidden; }
+  .short-card, .design-card, .drive-image-card { width: 100%; }
+  .design-card img { aspect-ratio: 4 / 3; object-fit: cover; }
+  .short-thumb-img { aspect-ratio: 16 / 9; object-fit: cover; }
+  .drive-image-card img { aspect-ratio: 16 / 9; object-fit: cover; }
+  .analytics-work-groups { gap: 1.4rem; }
+  .panel-title { overflow-wrap: anywhere; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motion-item { will-change: auto; }
+}
